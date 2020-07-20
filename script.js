@@ -1,6 +1,6 @@
 const currentDate = document.getElementById("currentDay");
-var now = moment();
-currentDate.innerHTML=now;
+
+
 var times = [
     {
         time: "9:00",
@@ -67,4 +67,8 @@ var times = [
         ampm: "pm",
         stored: "",
     }
-]
+];
+
+var m = moment();
+console.log(m);
+
