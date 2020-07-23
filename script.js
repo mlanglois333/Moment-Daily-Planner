@@ -85,17 +85,18 @@ function saveData(){
     
     localStorage.setItem('locStor'+i, indexData);
 
-    console.log(localStorage);
+    
     }
-
-};
+console.log(localStorage);
+}
 
 function renderData(){
    for (i=0; i<arrLen; i++){
 
     var getDat = localStorage.getItem('locStor' + i)
     times[i].stored = getDat;
-    $('#saveDat'+i).innerHTML= times[i].stored;
+    document.getElementById('saveDat'+i).innerHTML= times[i].stored;
+    console.log(getDat);
    }
 }
 
@@ -127,4 +128,6 @@ $(".saveClass").on("click", function(event) {
     event.preventDefault();
 });
 $(".saveClass").on("click", function(){ saveData()});
+$(".saveClass").on("click", function(){ renderData()});
+
 
