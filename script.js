@@ -1,71 +1,71 @@
 const currentDate = document.getElementById("currentDay");
 const contentTable = document.getElementById("contentTable");
-var now = moment();
+var now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 var times = [
     {
-        time: "9:00",
-        ampm: "am",
+        time: "9:00am",
+        ampm: "09",
         stored: "",
     },
     {
-        time: "10:00",
-        ampm: "am",
+        time: "10:00am",
+        ampm: "10",
         stored: "",
     },
     {
-        time: "11:00",
-        ampm: "am",
+        time: "11:00am",
+        ampm: "11",
         stored: "",
     },
     {
-        time: "12:00",
-        ampm: "pm",
+        time: "12:00pm",
+        ampm: "12",
         stored: "",
     },
     {
-        time: "1:00",
-        ampm: "pm",
+        time: "1:00pm",
+        ampm: "13",
         stored: "",
     },
     {
-        time: "2:00",
-        ampm: "pm",
+        time: "2:00pm",
+        ampm: "14",
         stored: "",
     },
     {
-        time: "3:00",
-        ampm: "pm",
+        time: "3:00pm",
+        ampm: "15",
         stored: "",
     },
     {
-        time: "4:00",
-        ampm: "pm",
+        time: "4:00pm",
+        ampm: "16",
         stored: "",
     },
     {
-        time: "5:00",
-        ampm: "pm",
+        time: "5:00pm",
+        ampm: "17",
         stored: "",
     },
     {
-        time: "6:00",
-        ampm: "pm",
+        time: "6:00pm",
+        ampm: "18",
         stored: "",
     },
     {
-        time: "7:00",
-        ampm: "pm",
+        time: "7:00pm",
+        ampm: "19",
         stored: "",
     },
     {
-        time: "8:00",
-        ampm: "pm",
+        time: "8:00pm",
+        ampm: "20",
         stored: "",
     },
     {
-        time: "9:00",
-        ampm: "pm",
+        time: "9:00pm",
+        ampm: "21",
         stored: "",
     }
 ];
@@ -104,12 +104,24 @@ function tableDisp() {
 
 for (i=0; i<arrLen; i++){
 
+    function renderTime(){
+        var mom=moment(times[i].ampm, 'HH');
+        var nowMom = moment().format('HH');
+    
+        if (mom._i < nowMom) {rows.attr('class', 'past')}
+        else if (mom._i > nowMom) {rows.attr('class', 'future')}
+        else if (mom._i === nowMom) {rows.attr('class', 'present')}
+    
+    
+    };
+
     var rows= $("<form>").attr({"class" : "row"});
     $(".container").append(rows);
+    renderTime();
 
     var timeDiv = $("<div>");
     timeDiv.attr('class', 'col-1 timeClass');
-    timeDiv.text(times[i].time + times[i].ampm);
+    timeDiv.text(times[i].time);
     var contentDiv = $("<textarea>");
     contentDiv.attr('class', 'col-10 contentClass');
     contentDiv.attr('id', 'saveDat'+ i);
@@ -124,6 +136,7 @@ for (i=0; i<arrLen; i++){
 
 tableDisp();
 renderData();
+
 $(".saveClass").on("click", function(event) {
     event.preventDefault();
 });
