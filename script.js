@@ -71,82 +71,106 @@ var times = [
 ];
 var arrLen = times.length;
 
-currentDate.innerHTML=now;
+currentDate.innerHTML = now;
 
-function clearData(){
-    for (i=0; i<arrLen; i++){
-    localStorage.removeItem('locStor'+i);
-    times[i].stored ="";
-    $("#saveDat").innerHTML=times[i].stored;
+function clearData() {
+
+    var clear = confirm("This will clear the entire planner. Would you like to proceed?")
+
+    if (clear === true) {
+
+        for (i = 0; i < arrLen; i++) {
+            localStorage.removeItem('locStor' + i);
+            times[i].stored = "";
+            $("#saveDat").innerHTML = times[i].stored;
+            
+        }
+    }
+    else { return }
+
 }
 
-function saveData(){
-    for (i=0; i<arrLen; i++) {
+function saveData() {
+    for (i = 0; i < arrLen; i++) {
 
-        var indexData = $('#saveDat'+i).val();
+        var indexData = $('#saveDat' + i).val();
         times[i].stored = indexData;
         console.log(indexData);
 
-    
-    localStorage.setItem('locStor'+i, indexData);
 
-    
+        localStorage.setItem('locStor' + i, indexData);
+
+
     }
-console.log(localStorage);
+    console.log(localStorage);
 }
 
-function renderData(){
-   for (i=0; i<arrLen; i++){
+function renderData() {
+    for (i = 0; i < arrLen; i++) {
 
-    var getDat = localStorage.getItem('locStor' + i)
-    times[i].stored = getDat;
-    document.getElementById('saveDat'+i).innerHTML= times[i].stored;
-    console.log(getDat);
-   }
+        var getDat = localStorage.getItem('locStor' + i)
+        times[i].stored = getDat;
+        document.getElementById('saveDat' + i).innerHTML = times[i].stored;
+        console.log(getDat);
+    }
 }
 
 function tableDisp() {
 
-for (i=0; i<arrLen; i++){
+    for (i = 0; i < arrLen; i++) {
 
-    function renderTime(){
-        var mom=moment(times[i].ampm, 'HH');
-        var nowMom = moment().format('HH');
-    
-        if (mom._i < nowMom) {rows.attr('class', 'row past')}
-        else if (mom._i > nowMom) {rows.attr('class', 'row future')}
-        else if (mom._i === nowMom) {rows.attr('class', 'row present')}
-    
-    
-    };
+        function renderTime() {
+            var mom = moment(times[i].ampm, 'HH');
+            var nowMom = moment().format('HH');
 
-    var rows= $("<form>")
-    renderTime();
-    $(".container").append(rows);
-    
+            if (mom._i < nowMom) { rows.attr('class', 'row past') }
+            else if (mom._i > nowMom) { rows.attr('class', 'row future') }
+            else if (mom._i === nowMom) { rows.attr('class', 'row present') }
 
-    var timeDiv = $("<div>");
-    timeDiv.attr('class', 'col-1 timeClass');
-    timeDiv.text(times[i].time);
-    var contentDiv = $("<textarea>");
-    contentDiv.attr('class', 'col-10 contentClass');
-    contentDiv.attr('id', 'saveDat'+ i);
-    contentDiv.text(times[i].stored);
-    var saveBut = $("<button>");
-   saveBut.attr('class', 'col-1 saveClass');
-   saveBut.text('Save');
 
-    rows.append(timeDiv, contentDiv, saveBut);
-};}
+        }
+
+        var rows = $("<form>")
+        renderTime();
+        $(".container").append(rows);
+
+
+        var timeDiv = $("<div>");
+        timeDiv.attr('class', 'col-1 timeClass');
+        timeDiv.text(times[i].time);
+        var contentDiv = $("<textarea>");
+        contentDiv.attr('class', 'col-10 contentClass');
+        contentDiv.attr('id', 'saveDat' + i);
+        contentDiv.text(times[i].stored);
+        var butCont = $("<div>");
+        butCont.attr('class', 'col-1 saveClass');
+        var saveBut = $("<button>");
+        saveBut.attr('class', 'clickSave')
+
+
+        saveBut.text('Save');
+        var clearBut = $("<button>");
+        clearBut.attr('class', 'clickClear')
+        clearBut.text('Clear');
+        butCont.append(saveBut, clearBut);
+
+
+        rows.append(timeDiv, contentDiv, butCont);
+    }
+}
 
 
 tableDisp();
 renderData();
 
-$(".saveClass").on("click", function(event) {
+$(".saveClass").on("click", function (event) {
     event.preventDefault();
 });
-$(".saveClass").on("click", function(){ saveData()});
-$(".saveClass").on("click", function(){ renderData()});
+$(".clickClear").on("click", function () { clearData() });
+$(".clickClear").on("click", function () { renderData() });
+
+
+$(".clickSave").on("click", function () { saveData() });
+
 
 
