@@ -1,6 +1,6 @@
 const currentDate = document.getElementById("currentDay");
 const contentTable = document.getElementById("contentTable");
-var now = moment().format('MMMM Do YYYY, h:mm:ss a');
+const now = moment().format('MMMM Do YYYY, h:mm:ss a');
 
 var times = [
     {
@@ -116,7 +116,7 @@ function tableDisp() {
 
         function renderTime() {
             var mom = moment(times[i].ampm, 'HH');
-            var nowMom = moment().format('HH');
+            const nowMom = moment().format('HH');
 
             if (mom._i < nowMom) { rows.attr('class', 'row past') }
             else if (mom._i > nowMom) { rows.attr('class', 'row future') }
@@ -125,27 +125,27 @@ function tableDisp() {
 
         }
 
-        var rows = $("<form>")
+        const rows = $("<form>")
         renderTime();
         $(".container").append(rows);
 
-        var timeDiv = $("<div>");
+        const timeDiv = $("<div>");
         timeDiv.attr('class', 'col-1 timeClass');
         timeDiv.text(times[i].time);
 
-        var contentDiv = $("<textarea>");
+        const contentDiv = $("<textarea>");
         contentDiv.attr('class', 'col-10 contentClass');
         contentDiv.attr('id', 'saveDat' + i);
         contentDiv.text(times[i].stored);
 
-        var butCont = $("<div>");
+       const butCont = $("<div>");
         butCont.attr('class', 'col-1 saveClass');
 
-        var saveBut = $("<button>");
+        const saveBut = $("<button>");
         saveBut.attr('class', 'clickSave')
         saveBut.text('Save');
-        
-        var clearBut = $("<button>");
+
+        const clearBut = $("<button>");
         clearBut.attr('class', 'clickClear')
         clearBut.text('Clear');
         butCont.append(saveBut, clearBut);
