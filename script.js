@@ -83,7 +83,7 @@ function clearData() {
             localStorage.removeItem('locStor' + i);
             times[i].stored = "";
             $("#saveDat").innerHTML = times[i].stored;
-            
+
         }
     }
     else { return }
@@ -95,14 +95,9 @@ function saveData() {
 
         var indexData = $('#saveDat' + i).val();
         times[i].stored = indexData;
-        console.log(indexData);
-
-
         localStorage.setItem('locStor' + i, indexData);
-
-
     }
-    console.log(localStorage);
+   
 }
 
 function renderData() {
@@ -111,7 +106,7 @@ function renderData() {
         var getDat = localStorage.getItem('locStor' + i)
         times[i].stored = getDat;
         document.getElementById('saveDat' + i).innerHTML = times[i].stored;
-        console.log(getDat);
+        
     }
 }
 
@@ -134,21 +129,22 @@ function tableDisp() {
         renderTime();
         $(".container").append(rows);
 
-
         var timeDiv = $("<div>");
         timeDiv.attr('class', 'col-1 timeClass');
         timeDiv.text(times[i].time);
+
         var contentDiv = $("<textarea>");
         contentDiv.attr('class', 'col-10 contentClass');
         contentDiv.attr('id', 'saveDat' + i);
         contentDiv.text(times[i].stored);
+
         var butCont = $("<div>");
         butCont.attr('class', 'col-1 saveClass');
+
         var saveBut = $("<button>");
         saveBut.attr('class', 'clickSave')
-
-
         saveBut.text('Save');
+        
         var clearBut = $("<button>");
         clearBut.attr('class', 'clickClear')
         clearBut.text('Clear');
@@ -166,10 +162,9 @@ renderData();
 $(".saveClass").on("click", function (event) {
     event.preventDefault();
 });
+
 $(".clickClear").on("click", function () { clearData() });
 $(".clickClear").on("click", function () { renderData() });
-
-
 $(".clickSave").on("click", function () { saveData() });
 
 
