@@ -73,7 +73,12 @@ var arrLen = times.length;
 
 currentDate.innerHTML=now;
 
-
+function clearData(){
+    for (i=0; i<arrLen; i++){
+    localStorage.removeItem('locStor'+i);
+    times[i].stored ="";
+    $("#saveDat").innerHTML=times[i].stored;
+}
 
 function saveData(){
     for (i=0; i<arrLen; i++) {
@@ -108,16 +113,17 @@ for (i=0; i<arrLen; i++){
         var mom=moment(times[i].ampm, 'HH');
         var nowMom = moment().format('HH');
     
-        if (mom._i < nowMom) {rows.attr('class', 'past')}
-        else if (mom._i > nowMom) {rows.attr('class', 'future')}
-        else if (mom._i === nowMom) {rows.attr('class', 'present')}
+        if (mom._i < nowMom) {rows.attr('class', 'row past')}
+        else if (mom._i > nowMom) {rows.attr('class', 'row future')}
+        else if (mom._i === nowMom) {rows.attr('class', 'row present')}
     
     
     };
 
-    var rows= $("<form>").attr({"class" : "row"});
-    $(".container").append(rows);
+    var rows= $("<form>")
     renderTime();
+    $(".container").append(rows);
+    
 
     var timeDiv = $("<div>");
     timeDiv.attr('class', 'col-1 timeClass');
