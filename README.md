@@ -6,11 +6,9 @@ Each day is color coded whether is it is past, present, or future relative to th
 
 ![Alt text](Work-Day-Scheduler.png?raw=true "Screenshot")
 
-Marc Langlois
 
-MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) [2020] [Marc Langlois]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
